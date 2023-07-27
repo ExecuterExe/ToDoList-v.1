@@ -1,8 +1,8 @@
 @import url("nullStyle.css");
 
 .wrapper {
-    width: 100vw;
-    height: 100vh;
+    max-width: 100vw;
+    min-height: 100vh;
     background-image: linear-gradient(to bottom, rgb(150, 170, 187), rgb(14, 14, 10));
 }
 
@@ -44,6 +44,7 @@
     width: 100px;
     margin-left: 0.5%;
     border-radius: 10%;
+    text-align: center;
     background-color: beige;
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -71,11 +72,14 @@ li {
 }
 
 .left-panel {
+    width: 90%;
+    align-self: center
+}
+
+.task-text {
     font-size: 20px;
     padding-left: 5px;
-    width: 90%;
     overflow: hidden;
-    align-self: center
 }
 
 .right-panel {
