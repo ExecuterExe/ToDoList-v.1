@@ -51,6 +51,11 @@
     border-image: linear-gradient(to bottom, rgb(133, 88, 238), rgb(56, 4, 90)) 1;
 }
 
+#submit-btn:focus {
+    outline: none;
+    user-select: none;
+}
+
 .block-task-list {
     margin-top: 1%;
     display: flex;
@@ -93,5 +98,5 @@ li {
 
 .delete-task-btn {
     display: block;
-    color: red;
+    cursor: pointer;
 }

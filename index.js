@@ -1,17 +1,27 @@
 const submitBtn = document.getElementById('submit-btn');
 const taskList = document.querySelector('.task-list');
 const inputText = document.getElementById('task-input');
+const btnForDelete = document.querySelectorAll('.delete-task-btn');
 let inputValue;
 let newTask;
 let deleteBtn;
 
 submitBtn.addEventListener('click', addTask);
+inputText.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        addTask();
+    }
+});
 
 function addTask() {
-    newTask = document.createElement('li');
-    taskList.prepend(newTask);
-    addingLeftPanel();
-    addingRightPanel();
+    inputValue = inputText.value.trim();
+    if (inputValue) {
+        newTask = document.createElement('li');
+        newTask.classList.add('task');
+        taskList.prepend(newTask);
+        addingLeftPanel();
+        addingRightPanel();
+    }
 }
 
 function addingLeftPanel() {
@@ -42,4 +52,12 @@ function addingDeleteBtn(rightPanel) {
     deleteBtn.textContent = '✖️';
     deleteBtn.classList.add('delete-task-btn');
     rightPanel.appendChild(deleteBtn);
+    deleteBtn.addEventListener('click', (e) => deleteTask(e))
+}
+
+function deleteTask(e) {
+    const listItem = e.target.closest('.task');
+    if (listItem) {
+        listItem.remove();
+    }
 }
