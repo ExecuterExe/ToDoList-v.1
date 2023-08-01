@@ -5,6 +5,7 @@ const btnForDelete = document.querySelectorAll('.delete-task-btn');
 let inputValue;
 let newTask;
 let deleteBtn;
+let lineFinish = null;
 
 submitBtn.addEventListener('click', addTask);
 inputText.addEventListener('keydown', (e) => {
@@ -29,6 +30,8 @@ function addingLeftPanel() {
     leftPanel.classList.add('left-panel');
     newTask.appendChild(leftPanel)
     addingTextTask(leftPanel);
+
+    leftPanel.addEventListener('click', (e) => finishTask(e))
 }
 
 function addingTextTask(leftPanel) {
@@ -52,6 +55,7 @@ function addingDeleteBtn(rightPanel) {
     deleteBtn.textContent = '✖️';
     deleteBtn.classList.add('delete-task-btn');
     rightPanel.appendChild(deleteBtn);
+
     deleteBtn.addEventListener('click', (e) => deleteTask(e))
 }
 
@@ -61,3 +65,46 @@ function deleteTask(e) {
         listItem.remove();
     }
 }
+
+function finishTask(e) {
+    const strikeString = e.target.closest('.left-panel').querySelector('.task-text');
+    strikeString.classList.toggle('strike-out');
+
+    const taskList = document.querySelector('.task-list');
+    const taskItem = strikeString.closest('.task');
+
+    const statusFinishTask = e.target.closest('li.task');
+
+    if (strikeString.classList.contains('strike-out')) {
+        taskList.appendChild(taskItem);
+        statusFinishTask.classList.toggle('status-of-finish')
+    } else {
+        taskList.insertBefore(taskItem, taskList.firstChild);
+        statusFinishTask.classList.toggle('status-of-finish')
+    }
+
+}
+// ToDo (alternative) - mechanism of finish line of task
+
+//     const unfinishedTasks = taskOfLine.querySelectorAll('.task:not(.strike-out)');
+
+//     const taskOfLine = document.querySelector('.task-list');
+
+//     if (unfinishedTasks.length > 0) {
+//         if (!lineFinish) {
+//             lineFinish = document.createElement('hr');
+//             lineFinish.classList.add('line-finish');
+//             taskOfLine.appendChild(lineFinish);
+//             if (taskOfLine) {
+//                 taskOfLine.appendChild(lineFinish);
+//             }
+//         }
+//     } else {
+//         if (lineFinish) {
+//             lineFinish.remove();
+//             lineFinish = null;
+//         }
+//     }
+
+// }
+
